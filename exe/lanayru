@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+
+require "pry"
+require "hexdump"
+require "circuitbreaker"
+require "circuitbreaker/faron"
+require "circuitbreaker/lanayru"
+
+CircuitBreaker::Faron::InteractiveDSL.new(CircuitBreaker::Lanayru::Backend.new(ARGV[0].to_i(0))).instance_eval do
+  pry
+end

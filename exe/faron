@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+require "pry"
+require "hexdump"
+require "circuitbreaker"
+require "circuitbreaker/faron"
+
+CircuitBreaker::Faron::InteractiveDSL.new(CircuitBreaker::Faron::Backend.new(ARGV[0])).instance_eval do
+  pry
+end
