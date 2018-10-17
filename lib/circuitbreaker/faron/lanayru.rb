@@ -27,10 +27,21 @@ module CircuitBreaker
             @registers[index] = value.to_i
           end
         end
+
+        0.upto(30) do |index|
+          define_method("x" + index.to_s) do
+            @registers[index]
+          end
+          define_method("x" + index.to_s + "=") do |value|
+            @registers[index] = value.to_i
+          end
+        end
         
         def x
           GPRAccessor.new(self)
         end
+
+        attr_accessor :registers
       end
       
       def initialize(backend, id, tls, entrypoint)
