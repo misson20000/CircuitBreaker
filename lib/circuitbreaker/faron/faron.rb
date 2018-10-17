@@ -1,4 +1,5 @@
 require_relative "elf.rb"
+require_relative "breakpoint.rb"
 require_relative "../standard_switch.rb"
 
 require "crabstone"
@@ -207,6 +208,10 @@ module CircuitBreaker
           puts "[#{id.to_s(16).ljust(8)}] Thread #{("'" + name + "'").ljust(0x22)}: 0x#{ctx.pc.to_s(16).rjust(16, "0")}: #{insn_str}"
         end
         nil
+      end
+
+      def breakpoint(ptr)
+        Breakpoint.new(make_pointer(ptr))
       end
       
       attr_reader :backend
